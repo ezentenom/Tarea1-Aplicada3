@@ -1,5 +1,5 @@
 ---
-title: "tarea1"
+title: "Tarea 1"
 output:
   pdf_document: default
   html_document: default
@@ -9,11 +9,59 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Problema 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Tenemos la matriz A y B 
+```{r}
+A = matrix(data=c(7, 5, 3, 2, 1, 8), byrow = TRUE, nrow = 2)
+B = matrix(data=c(11, -7, 8, 12, 0, 9), byrow = TRUE, nrow = 2)
+```
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+A
+B
+```
+a) A transpuesta
+```{r}
+t(A)
+```
+b) A - B
+```{r}
+A - B
+```
+c) AB no se puede por que las dimensiones no concuerdan
+```{r}
+#A %*% B
+```
+d)A'A
+```{r}
+t(A)%*%A
+```
+e)AA'
+```{r}
+A%*%t(A)
+```
+f) A + B
+```{r}
+A + B
+```
+g)A'B
+```{r}
+t(A)%*%B
+```
+h) AB'
+```{r}
+A%*%t(B)
+```
+i) 17.3A
+```{r}
+17.3*A
+```
+j)(1/19)B
+```{r}
+1/19*B
+```
+
 
 ```{r cars}
 summary(cars)
