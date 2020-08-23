@@ -93,7 +93,7 @@ Así:
 
 $$det(S(a)) = det(S+(\overline{x}-a)(\overline{x}-a)') = det(S)(1+(\overline{x}-a)'S^{-1}(\overline{x}-a))$$
 
-Además, como $S$ es semidefinida positiva sus eigenvalores son no negativos y los eigenvalores de $S^{-1}$ conservan el signo por lo que tambíen es semidefinida positiva y así la forma cuadrática $(\overline{x}-a)'S^{-1}(\overline{x}-a)$ tiene un valor mínimo de cero que se alcanza en $\overline{x} = a$ :
+Además, como $S$ es semidefinida positiva sus eigenvalores son no negativos y los eigenvalores de $S^{-1}$ son los recíprocos y conservan el signo por lo que tambíen es semidefinida positiva y así la forma cuadrática $(\overline{x}-a)'S^{-1}(\overline{x}-a)$ tiene un valor mínimo de cero que se alcanza en $\overline{x} = a$ :
 
 $$min_{a}det(S(a)) = det(S)$$
 
