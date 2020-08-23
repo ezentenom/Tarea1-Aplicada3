@@ -63,3 +63,38 @@ j)(1/19)B
 ```
 
 
+# Problema 6
+Para la matriz de covarianza alrededor de $x=a$
+$$S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' $$
+a)
+Por demostrar : 
+$$S(a) = S + (\overline{x} - a )(\overline{x} - a )' $$
+
+Recordemos que el producto exterior $f(x,y) = xy'$ es una función bilineal y tenemos que : 
+
+\begin{align*}
+&(x_{i}-a)(x_{i}-a)' = \\
+&(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x}+\overline{x}-a)' = \\ &(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x})' + (x_{i}-\overline{x}+\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ (\overline{x}-a)(x_{i}-\overline{x})'+ (x_{i}-\overline{x})(\overline{x}-a)'+ (\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ 2(\overline{x}-a)(x_{i}-\overline{x})'+ (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+Así
+\begin{align*}
+&S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' =\\
+&\frac{1}{n}\sum_{i=1}^{n}(x_{i}-\overline{x})(x_{i}-\overline{x})'+ \frac{2}{n}\sum_{i=1}^{n}(\overline{x}-a)(x_{i}-\overline{x})'+ \frac{1}{n}\sum_{i=1}^{n}(\overline{x}-a)(\overline{x}-a)' = \\
+&S + 2(\overline{x}-a)(\frac{1}{n}\sum_{i=1}^{n}x_{i}-\overline{x})'+(\overline{x}-a)(\overline{x}-a)' = \\
+&S + (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+b)  De a) podemos calcular el determinante de $S(a)$ recordando que 
+$$det(A+ba') = det(A)(1+b'A^{-1}a)$$
+Así:
+
+$$det(S(a)) = det(S+(\overline{x}-a)(\overline{x}-a)') = det(S)(1+(\overline{x}-a)'S^{-1}(\overline{x}-a))$$
+
+Además, como $S$ es semidefinida positiva sus eigenvalores son no negativos y los eigenvalores de $S^{-1}$ conservan el signo por lo que tambíen es semidefinida positiva y así la forma cuadrática $(\overline{x}-a)'S^{-1}(\overline{x}-a)$ tiene un valor mínimo de cero que se alcanza en $\overline{x} = a$ :
+
+$$min_{a}det(S(a)) = det(S)$$
+
+
