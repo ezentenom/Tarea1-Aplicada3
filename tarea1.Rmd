@@ -63,6 +63,150 @@ j)(1/19)B
 ```
 
 
+##Problema 3
+
+Trabajamos con el conjunto de datos `iris3`.
+
+```{r, echo=FALSE}
+data(iris3)
+```
+
+a) Calcular $\boldsymbol{\bar{x}}$, la matriz de sumas de cuadrados corregida por la media $\boldsymbol{A}$ y la matriz de covarianza insesgada $S_X$.
+
+```{r, echo=FALSE}
+#3a:
+#Cargamos datos de Iris y librerias de manejo de databases
+datos <- as.data.frame(iris3)
+```
+
+Tomamos la matriz $X$ con los datos correspondientes a la espcie Setosa. Se obtuvo lo siguiente: 
+```{r, echo=FALSE}
+X <- as.matrix(datos[,1:4])
+m <- nrow(X)
+uno <- rep(1,m)
+
+#Calculamos x barra
+suma_setosa <- colSums(X)
+media_setosa <- suma_setosa/m
+x_barra <- as.vector(media_setosa)
+
+#Calculamos la matriz A
+aux <- diag(m)-uno%*%t(uno)/m
+A <- as.matrix(t(X) %*% aux %*% X)
+
+#Matriz de covarianza muestral insesgada
+S_x <- as.matrix((1/49)*A)
+```
+
+```{r}
+x_barra
+A
+S_x
+```
+
+b)Obtener eigenvalores y eigenvectores de $\boldsymbol{S}$.
+```{r}
+(spec <- eigen(S_x))
+```
+
+c)Sea $U$ la matrix de eigenvectores de $S$ y $L$ la matriz cuadrada cuyas entradas en la diagonal son los eigenvalores. 
+```{r, echo=FALSE}
+U <- as.matrix(spec[[2]]) #matriz de eigenvectores
+L <- diag(spec$values,4)
+```
+
+Demostramos numéricamente que $\boldsymbol{ULU'}=\boldsymbol{S}$ calculando la norma euclideana de la diferencia de matrices y notemos que dichas cantidades son casi cero.
+```{r}
+norm(U%*%L%*%t(U) - S_x)
+```
+
+Vemos también que $\boldsymbol{ULU'}$ y $\boldsymbol{S}$ son prácticamente iguales. 
+```{r}
+U%*%L%*%t(U)
+S_x
+```
+
+Observamos que $\boldsymbol{U'U}=\boldsymbol{UU'}=\boldsymbol{I}_4$.(Se tomó un redondeo de 3 dígitos)
+```{r}
+round(U%*%t(U),3) #UU'
+round(t(U)%*%U,3) #U'U
+```
+
+Obtener matriz de gráficas de dispersión de las cuatro variables para cada variedad de
+iris, todo en la misma gráfica.
+```{r, echo=FALSE}
+colores <- c("blue", "chartreuse", "aquamarine")
+species <- names(iris3[1,1,])
+pairs(rbind(iris3[,,1],iris3[,,2],iris3[,,3]), 
+      col=colores[gl(3,50,labels = species)], pch = 19,  cex = 0.5 )
+```
+
+##Problema 4: 
+
+Usar los datos del ejercicio anterior.
+
+a)Considerando $Y=\begin{pmatrix}y_1 & y_2  & y_3  & y_4  & y_5\end{pmatrix}$ donde $y_i$ representa la $i$-ésima columna de $Y$ cuyas primeras cuatro columnas sean las mismas que X y cuya última columna es Petal L. + Petal W. con una matriz $C$ tal que $Y=XC$. 
+
+Tomamos $C$ de la forma:
+$$C=\begin{pmatrix}1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&1\\0&0&0&1&1\end{pmatrix}$$
+```{r pressure, echo=FALSE}
+C<- cbind((diag(4)),c(0,0,1,1))
+Y<- X%*%C
+#Y tiene la siguiente forma:
+head(Y) 
+```
+
+b)Calcular la matriz de covarianzas muestral $S_Y$ y sus eigenvalores y eigenvectores
+```{r, echo=FALSE}
+n <- nrow(Y)
+unoY <- rep(1,n)
+
+#Calculamos y barra
+sumaY <- colSums(Y)
+y_barra <- sumaY/n
+
+#Calculamos la matriz A
+auxY <- diag(n)-uno%*%t(uno)/n
+A_Y <- t(Y) %*% auxY %*% Y
+
+#Matriz de covarianza muestral insesgada
+S_y <- (1/49)*A_Y
+
+#eigenvalores y eigenvectores
+(spec_y <- eigen(S_y))
+```
+
+```{r}
+y_barra
+A_Y
+S_y
+```
+
+Notemos que el valor más  pequeño de los eigenvalores es _cercano_ a cero. De la misma forma, la variable `comb_lin` toma la combinación lineal de las columnas de $Y$ cuyos pesos son las entradas del eigenvector correspondiente al eigenvalor más pequeño. Así podemos ver que la varianza de las entradas de `comb_lin` es _casi_ cero.
+```{r, echo=FALSE}
+min(spec_y$values)
+comb_lin <- numeric(dim(S_y)[1])
+for (i in 1:dim(S_y)[1]) {
+  comb_lin <- comb_lin + spec_y$vectors[i,5]*Y[,i]
+}
+```
+
+```{r}
+var(comb_lin)
+```
+
+c)También se puede calcular la varianza muestral $S_Y$ a partir de $C'S_XC$. Comprobamos esto al observar que la norma euclideana de la diferencia entre las matrices  y  es _casi_ cero.
+```{r, echo=FALSE}
+aprox <- t(C)%*%S_x%*%C
+```
+
+```{r}
+norm(aprox - S_y)
+```
+
+
+
+
 # Problema 6
 Para la matriz de covarianza alrededor de $x=a$
 $$S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' $$

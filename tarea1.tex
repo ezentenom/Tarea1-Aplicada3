@@ -1,0 +1,359 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tarea 1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Tarea 1}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{problema-1}{%
+\subsection{Problema 1}\label{problema-1}}
+
+Tenemos la matriz A y B
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{), }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\NormalTok{B =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{c}\NormalTok{(}\DecValTok{11}\NormalTok{, }\DecValTok{-7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{9}\NormalTok{), }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    7    5    3
+## [2,]    2    1    8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   11   -7    8
+## [2,]   12    0    9
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  A transpuesta
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    7    2
+## [2,]    5    1
+## [3,]    3    8
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  A - B
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{-}\StringTok{ }\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   -4   12   -5
+## [2,]  -10    1   -1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  AB no se puede por que las dimensiones no concuerdan
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#A %*% B}
+\end{Highlighting}
+\end{Shaded}
+
+d)A'A
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t}\NormalTok{(A)}\OperatorTok{%*%}\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   53   37   37
+## [2,]   37   26   23
+## [3,]   37   23   73
+\end{verbatim}
+
+e)AA'
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   83   43
+## [2,]   43   69
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  A + B
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{+}\StringTok{ }\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   18   -2   11
+## [2,]   14    1   17
+\end{verbatim}
+
+g)A'B
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t}\NormalTok{(A)}\OperatorTok{%*%}\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]  101  -49   74
+## [2,]   67  -35   49
+## [3,]  129  -21   96
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  AB'
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(B)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   66  111
+## [2,]   79   96
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi})}
+\tightlist
+\item
+  17.3A
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{17.3}\OperatorTok{*}\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       [,1] [,2]  [,3]
+## [1,] 121.1 86.5  51.9
+## [2,]  34.6 17.3 138.4
+\end{verbatim}
+
+j)(1/19)B
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\OperatorTok{/}\DecValTok{19}\OperatorTok{*}\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]       [,2]      [,3]
+## [1,] 0.5789474 -0.3684211 0.4210526
+## [2,] 0.6315789  0.0000000 0.4736842
+\end{verbatim}
+
+\hypertarget{problema-6}{%
+\section{Problema 6}\label{problema-6}}
+
+Para la matriz de covarianza alrededor de \(x=a\)
+\[S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' \] a) Por
+demostrar : \[S(a) = S + (\overline{x} - a )(\overline{x} - a )' \]
+
+Recordemos que el producto exterior \(f(x,y) = xy'\) es una función
+bilineal y tenemos que :
+
+\begin{align*}
+&(x_{i}-a)(x_{i}-a)' = \\
+&(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x}+\overline{x}-a)' = \\ &(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x})' + (x_{i}-\overline{x}+\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ (\overline{x}-a)(x_{i}-\overline{x})'+ (x_{i}-\overline{x})(\overline{x}-a)'+ (\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ 2(\overline{x}-a)(x_{i}-\overline{x})'+ (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+Así \begin{align*}
+&S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' =\\
+&\frac{1}{n}\sum_{i=1}^{n}(x_{i}-\overline{x})(x_{i}-\overline{x})'+ \frac{2}{n}\sum_{i=1}^{n}(\overline{x}-a)(x_{i}-\overline{x})'+ \frac{1}{n}\sum_{i=1}^{n}(\overline{x}-a)(\overline{x}-a)' = \\
+&S + 2(\overline{x}-a)(\frac{1}{n}\sum_{i=1}^{n}x_{i}-\overline{x})'+(\overline{x}-a)(\overline{x}-a)' = \\
+&S + (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  De a) podemos calcular el determinante de \(S(a)\) recordando que
+  \[det(A+ba') = det(A)(1+b'A^{-1}a)\] Así:
+\end{enumerate}
+
+\[det(S(a)) = det(S+(\overline{x}-a)(\overline{x}-a)') = det(S)(1+(\overline{x}-a)'S^{-1}(\overline{x}-a))\]
+
+Además, como \(S\) es semidefinida positiva sus eigenvalores son no
+negativos y los eigenvalores de \(S^{-1}\) son los recíprocos y
+conservan el signo por lo que tambíen es semidefinida positiva y así la
+forma cuadrática \((\overline{x}-a)'S^{-1}(\overline{x}-a)\) tiene un
+valor mínimo de cero que se alcanza en \(\overline{x} = a\) :
+
+\[min_{a}det(S(a)) = det(S)\]
+
+\end{document}
