@@ -1,0 +1,100 @@
+---
+title: "Tarea 1"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problema 1
+
+Tenemos la matriz A y B 
+```{r}
+A = matrix(data=c(7, 5, 3, 2, 1, 8), byrow = TRUE, nrow = 2)
+B = matrix(data=c(11, -7, 8, 12, 0, 9), byrow = TRUE, nrow = 2)
+```
+
+```{r}
+A
+B
+```
+a) A transpuesta
+```{r}
+t(A)
+```
+b) A - B
+```{r}
+A - B
+```
+c) AB no se puede por que las dimensiones no concuerdan
+```{r}
+#A %*% B
+```
+d)A'A
+```{r}
+t(A)%*%A
+```
+e)AA'
+```{r}
+A%*%t(A)
+```
+f) A + B
+```{r}
+A + B
+```
+g)A'B
+```{r}
+t(A)%*%B
+```
+h) AB'
+```{r}
+A%*%t(B)
+```
+i) 17.3A
+```{r}
+17.3*A
+```
+j)(1/19)B
+```{r}
+1/19*B
+```
+
+
+# Problema 6
+Para la matriz de covarianza alrededor de $x=a$
+$$S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' $$
+a)
+Por demostrar : 
+$$S(a) = S + (\overline{x} - a )(\overline{x} - a )' $$
+
+Recordemos que el producto exterior $f(x,y) = xy'$ es una función bilineal y tenemos que : 
+
+\begin{align*}
+&(x_{i}-a)(x_{i}-a)' = \\
+&(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x}+\overline{x}-a)' = \\ &(x_{i}-\overline{x}+\overline{x}-a)(x_{i}-\overline{x})' + (x_{i}-\overline{x}+\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ (\overline{x}-a)(x_{i}-\overline{x})'+ (x_{i}-\overline{x})(\overline{x}-a)'+ (\overline{x}-a)(\overline{x}-a)' = \\
+&(x_{i}-\overline{x})(x_{i}-\overline{x})'+ 2(\overline{x}-a)(x_{i}-\overline{x})'+ (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+Así
+\begin{align*}
+&S(a) = \frac{1}{n}\sum_{i=1}^{n} (x_{i}-a)(x_{i}-a)' =\\
+&\frac{1}{n}\sum_{i=1}^{n}(x_{i}-\overline{x})(x_{i}-\overline{x})'+ \frac{2}{n}\sum_{i=1}^{n}(\overline{x}-a)(x_{i}-\overline{x})'+ \frac{1}{n}\sum_{i=1}^{n}(\overline{x}-a)(\overline{x}-a)' = \\
+&S + 2(\overline{x}-a)(\frac{1}{n}\sum_{i=1}^{n}x_{i}-\overline{x})'+(\overline{x}-a)(\overline{x}-a)' = \\
+&S + (\overline{x}-a)(\overline{x}-a)'
+\end{align*}
+
+b)  De a) podemos calcular el determinante de $S(a)$ recordando que 
+$$det(A+ba') = det(A)(1+b'A^{-1}a)$$
+Así:
+
+$$det(S(a)) = det(S+(\overline{x}-a)(\overline{x}-a)') = det(S)(1+(\overline{x}-a)'S^{-1}(\overline{x}-a))$$
+
+Además, como $S$ es semidefinida positiva sus eigenvalores son no negativos y los eigenvalores de $S^{-1}$ son los recíprocos y conservan el signo por lo que tambíen es semidefinida positiva y así la forma cuadrática $(\overline{x}-a)'S^{-1}(\overline{x}-a)$ tiene un valor mínimo de cero que se alcanza en $\overline{x} = a$ :
+
+$$min_{a}det(S(a)) = det(S)$$
+
+
