@@ -37,6 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Tarea 1},
+  pdfauthor={Javier Montiel González, Eliza Zenteno y Andrés Cruz Vega},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -100,8 +101,8 @@
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 
 \title{Tarea 1}
-\author{}
-\date{\vspace{-2.5em}}
+\author{Javier Montiel González, Eliza Zenteno y Andrés Cruz Vega}
+\date{24/8/2020}
 
 \begin{document}
 \maketitle
@@ -311,6 +312,280 @@ j)(1/19)B
 ##           [,1]       [,2]      [,3]
 ## [1,] 0.5789474 -0.3684211 0.4210526
 ## [2,] 0.6315789  0.0000000 0.4736842
+\end{verbatim}
+
+\#\#Problema 3
+
+Trabajamos con el conjunto de datos \texttt{iris3}.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Calcular \(\boldsymbol{\bar{x}}\), la matriz de sumas de cuadrados
+  corregida por la media \(\boldsymbol{A}\) y la matriz de covarianza
+  insesgada \(S_X\).
+\end{enumerate}
+
+Tomamos la matriz \(X\) con los datos correspondientes a la especie
+Setosa. Se obtuvo lo siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x_barra}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.006 3.428 1.462 0.246
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 Sepal L..Setosa Sepal W..Setosa Petal L..Setosa Petal W..Setosa
+## Sepal L..Setosa          6.0882          4.8616          0.8014          0.5062
+## Sepal W..Setosa          4.8616          7.0408          0.5732          0.4556
+## Petal L..Setosa          0.8014          0.5732          1.4778          0.2974
+## Petal W..Setosa          0.5062          0.4556          0.2974          0.5442
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{S_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 Sepal L..Setosa Sepal W..Setosa Petal L..Setosa Petal W..Setosa
+## Sepal L..Setosa      0.12424898     0.099216327     0.016355102     0.010330612
+## Sepal W..Setosa      0.09921633     0.143689796     0.011697959     0.009297959
+## Petal L..Setosa      0.01635510     0.011697959     0.030159184     0.006069388
+## Petal W..Setosa      0.01033061     0.009297959     0.006069388     0.011106122
+\end{verbatim}
+
+b)Obtener eigenvalores y eigenvectores de \(\boldsymbol{S}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(spec <-}\StringTok{ }\KeywordTok{eigen}\NormalTok{(S_x))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## eigen() decomposition
+## $values
+## [1] 0.236455690 0.036918732 0.026796399 0.009033261
+## 
+## $vectors
+##            [,1]       [,2]       [,3]        [,4]
+## [1,] 0.66907840  0.5978840  0.4399628 -0.03607712
+## [2,] 0.73414783 -0.6206734 -0.2746075 -0.01955027
+## [3,] 0.09654390  0.4900556 -0.8324495 -0.23990129
+## [4,] 0.06356359  0.1309379 -0.1950675  0.96992969
+\end{verbatim}
+
+c)Sea \(U\) la matrix de eigenvectores de \(S\) y \(L\) la matriz
+cuadrada cuyas entradas en la diagonal son los eigenvalores.
+
+Demostramos numéricamente que \(\boldsymbol{ULU'}=\boldsymbol{S}\)
+calculando la norma euclideana de la diferencia de matrices y notemos
+que dichas cantidades son casi cero.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{norm}\NormalTok{(U}\OperatorTok{%*%}\NormalTok{L}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(U) }\OperatorTok{-}\StringTok{ }\NormalTok{S_x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8.262488e-15
+\end{verbatim}
+
+Vemos también que \(\boldsymbol{ULU'}\) y \(\boldsymbol{S}\) son
+prácticamente iguales.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{U}\OperatorTok{%*%}\NormalTok{L}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(U)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]        [,2]        [,3]        [,4]
+## [1,] 0.12424898 0.099216327 0.016355102 0.010330612
+## [2,] 0.09921633 0.143689796 0.011697959 0.009297959
+## [3,] 0.01635510 0.011697959 0.030159184 0.006069388
+## [4,] 0.01033061 0.009297959 0.006069388 0.011106122
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{S_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 Sepal L..Setosa Sepal W..Setosa Petal L..Setosa Petal W..Setosa
+## Sepal L..Setosa      0.12424898     0.099216327     0.016355102     0.010330612
+## Sepal W..Setosa      0.09921633     0.143689796     0.011697959     0.009297959
+## Petal L..Setosa      0.01635510     0.011697959     0.030159184     0.006069388
+## Petal W..Setosa      0.01033061     0.009297959     0.006069388     0.011106122
+\end{verbatim}
+
+Observamos que
+\(\boldsymbol{U'U}=\boldsymbol{UU'}=\boldsymbol{I}_4\).(Se tomó un
+redondeo de 3 dígitos)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{round}\NormalTok{(U}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(U),}\DecValTok{3}\NormalTok{) }\CommentTok{#UU'}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{round}\NormalTok{(}\KeywordTok{t}\NormalTok{(U)}\OperatorTok{%*%}\NormalTok{U,}\DecValTok{3}\NormalTok{) }\CommentTok{#U'U}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1
+\end{verbatim}
+
+Obtener matriz de gráficas de dispersión de las cuatro variables para
+cada variedad de iris, todo en la misma gráfica.
+\includegraphics{tarea1_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\#\#Problema 4:
+
+Usar los datos del ejercicio anterior.
+
+a)Considerando
+\(Y=\begin{pmatrix}y_1 & y_2 & y_3 & y_4 & y_5\end{pmatrix}\) donde
+\(y_i\) representa la \(i\)-ésima columna de \(Y\) cuyas primeras cuatro
+columnas sean las mismas que X y cuya última columna es Petal L. + Petal
+W. con una matriz \(C\) tal que \(Y=XC\).
+
+Tomamos \(C\) de la forma:
+\[C=\begin{pmatrix}1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&1\\0&0&0&1&1\end{pmatrix}\]
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  5.1  3.5  1.4  0.2  1.6
+## [2,]  4.9  3.0  1.4  0.2  1.6
+## [3,]  4.7  3.2  1.3  0.2  1.5
+## [4,]  4.6  3.1  1.5  0.2  1.7
+## [5,]  5.0  3.6  1.4  0.2  1.6
+## [6,]  5.4  3.9  1.7  0.4  2.1
+\end{verbatim}
+
+b)Calcular la matriz de covarianzas muestral \(S_Y\) y sus eigenvalores
+y eigenvectores
+
+\begin{verbatim}
+## eigen() decomposition
+## $values
+## [1] 2.442194e-01 7.483824e-02 3.305869e-02 1.049178e-02 7.456453e-19
+## 
+## $vectors
+##            [,1]        [,2]        [,3]        [,4]          [,5]
+## [1,] 0.65694047  0.03846434  0.75289193 -0.01017121  3.463130e-16
+## [2,] 0.71184975  0.29542749 -0.63659061 -0.02729311 -2.573590e-16
+## [3,] 0.12521671 -0.54795807 -0.08917354 -0.58547201 -5.773503e-01
+## [4,] 0.07555878 -0.20605014 -0.04479513  0.78517149 -5.773503e-01
+## [5,] 0.20077549 -0.75400821 -0.13396867  0.19969948  5.773503e-01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y_barra}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.006 3.428 1.462 0.246 1.708
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A_Y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1]   [,2]   [,3]   [,4]   [,5]
+## [1,] 6.0882 4.8616 0.8014 0.5062 1.3076
+## [2,] 4.8616 7.0408 0.5732 0.4556 1.0288
+## [3,] 0.8014 0.5732 1.4778 0.2974 1.7752
+## [4,] 0.5062 0.4556 0.2974 0.5442 0.8416
+## [5,] 1.3076 1.0288 1.7752 0.8416 2.6168
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{S_y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]        [,2]        [,3]        [,4]       [,5]
+## [1,] 0.12424898 0.099216327 0.016355102 0.010330612 0.02668571
+## [2,] 0.09921633 0.143689796 0.011697959 0.009297959 0.02099592
+## [3,] 0.01635510 0.011697959 0.030159184 0.006069388 0.03622857
+## [4,] 0.01033061 0.009297959 0.006069388 0.011106122 0.01717551
+## [5,] 0.02668571 0.020995918 0.036228571 0.017175510 0.05340408
+\end{verbatim}
+
+Notemos que el valor más pequeño de los eigenvalores es \emph{cercano} a
+cero. De la misma forma, la variable \texttt{comb\_lin} toma la
+combinación lineal de las columnas de \(Y\) cuyos pesos son las entradas
+del eigenvector correspondiente al eigenvalor más pequeño. Así podemos
+ver que la varianza de las entradas de \texttt{comb\_lin} es \emph{casi}
+cero.
+
+\begin{verbatim}
+## [1] 7.456453e-19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var}\NormalTok{(comb_lin)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.336397e-32
+\end{verbatim}
+
+c)También se puede calcular la varianza muestral \(S_Y\) a partir de
+\(C'S_XC\). Comprobamos esto al observar que la norma euclideana de la
+diferencia entre las matrices y es \emph{casi} cero.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{norm}\NormalTok{(aprox }\OperatorTok{-}\StringTok{ }\NormalTok{S_y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.400058e-16
 \end{verbatim}
 
 \hypertarget{problema-6}{%

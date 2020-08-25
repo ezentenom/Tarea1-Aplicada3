@@ -1,12 +1,20 @@
 ---
 title: "Tarea 1"
+author: "Javier Montiel C.U.159216, Eliza Zenteno C.U.158026  y Andrés Cruz C.U. 155899 Vega"
+date: "24/8/2020"
 output:
-  pdf_document: default
   html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(lattice)
+library(ggplot2)
+library(nutshell)
+library(corrplot)# paquete que contiene los datos
+data(births2006.smpl) # datos de nacimiento
+str(births2006.smpl)  # estructura de los datos
 ```
 
 ## Problema 1
@@ -33,11 +41,11 @@ c) AB no se puede por que las dimensiones no concuerdan
 ```{r}
 #A %*% B
 ```
-d)A'A
+d) A'A
 ```{r}
 t(A)%*%A
 ```
-e)AA'
+e) AA'
 ```{r}
 A%*%t(A)
 ```
@@ -45,7 +53,7 @@ f) A + B
 ```{r}
 A + B
 ```
-g)A'B
+g) A'B
 ```{r}
 t(A)%*%B
 ```
@@ -57,13 +65,78 @@ i) 17.3A
 ```{r}
 17.3*A
 ```
-j)(1/19)B
+j) (1/19)B
 ```{r}
 1/19*B
 ```
+## Problema 2:
 
+ a)
 
-##Problema 3
+```{r echo=FALSE}
+#Dirección donde está el archivo T1-6.DAT
+setwd("C:/Users/Javier/Documents/The Last Dance/Aplicada III/Aplicada-III");
+datos<-read.table(file="T1-6.DAT", sep = "", col.names = c("x1","x2","x3","x4","x5","grupo"));
+
+plot(datos$x2[datos$grupo=="1"], main="Estímulos S1", xlab="Pacientes con esclerosis múltiple", ylab="Respuesta de los ojos")
+```
+
+Observamos que hay 29 pacientes con esclerosis múltiple. Por otro lado, la respuesta que estos pacientes tienen a los estímulos S1 en su mayoría están en un rango de 140 a 220.
+
+```{r echo=FALSE}
+plot(datos$x4[datos$grupo=="1"], main="Estímulos S2", xlab="Pacientes con esclerosis múltiple", ylab="Respuesta de los ojos")
+```
+
+Para el mismo grupo de pacientes, la mayoría de las respuestas a los estímulos S2 se encuentran en un rango de 200 a 300.
+
+ b)
+
+```{r, include=FALSE}
+datosE<-datos%>%
+  select(x1,x2,x3,x4,x5)%>%
+  filter(datos$grupo ==1);
+datosSE<-datos%>%
+  select(x1,x2,x3,x4,x5)%>%
+  filter(datos$grupo==0);
+```
+
+El vector de medias en los pacientes _con_ esclerosis múltiple es
+
+```{r echo=FALSE}
+apply(datosE, 2, mean)
+```
+La matriz de varianzas y covarianzas es
+```{r, echo=FALSE}
+var(datosE)
+```
+La matriz de correlaciones es
+```{r, echo=FALSE}
+cor(datosE)
+```
+
+Por otro lado, el vector de medias de los pacientes _sin_ esclerosis múltiple es
+
+```{r, echo=FALSE}
+apply(datosSE, 2, mean)
+```
+La matriz de varianzas y covarianzas es
+```{r, echo=FALSE}
+var(datosSE)
+```
+La matriz de correlaciones es
+```{r, echo=FALSE}
+cor(datosSE)
+```
+c)
+
+A continuación se presenta la matriz de dispersión de puntos:
+```{r, echo=FALSE}
+pairs(datos[,c(1,2,3,4,5)],col=datos[,6]+3, cex=1.2)
+```
+
+Podemos observar que existe hay una relación lineal entre x2 y x4, que son las respuestas de los ojos a los estimulos S1 y S2 respectivamente. En las demás variables involucradas no se observa ninguna relación de linealidad. 
+
+## Problema 3
 
 Trabajamos con el conjunto de datos `iris3`.
 
@@ -79,7 +152,7 @@ a) Calcular $\boldsymbol{\bar{x}}$, la matriz de sumas de cuadrados corregida po
 datos <- as.data.frame(iris3)
 ```
 
-Tomamos la matriz $X$ con los datos correspondientes a la espcie Setosa. Se obtuvo lo siguiente: 
+Tomamos la matriz $X$ con los datos correspondientes a la especie Setosa. Se obtuvo lo siguiente: 
 ```{r, echo=FALSE}
 X <- as.matrix(datos[,1:4])
 m <- nrow(X)
@@ -104,12 +177,12 @@ A
 S_x
 ```
 
-b)Obtener eigenvalores y eigenvectores de $\boldsymbol{S}$.
+b) Obtener eigenvalores y eigenvectores de $\boldsymbol{S}$.
 ```{r}
 (spec <- eigen(S_x))
 ```
 
-c)Sea $U$ la matrix de eigenvectores de $S$ y $L$ la matriz cuadrada cuyas entradas en la diagonal son los eigenvalores. 
+c) Sea $U$ la matrix de eigenvectores de $S$ y $L$ la matriz cuadrada cuyas entradas en la diagonal son los eigenvalores. 
 ```{r, echo=FALSE}
 U <- as.matrix(spec[[2]]) #matriz de eigenvectores
 L <- diag(spec$values,4)
@@ -141,11 +214,11 @@ pairs(rbind(iris3[,,1],iris3[,,2],iris3[,,3]),
       col=colores[gl(3,50,labels = species)], pch = 19,  cex = 0.5 )
 ```
 
-##Problema 4: 
+## Problema 4: 
 
 Usar los datos del ejercicio anterior.
 
-a)Considerando $Y=\begin{pmatrix}y_1 & y_2  & y_3  & y_4  & y_5\end{pmatrix}$ donde $y_i$ representa la $i$-ésima columna de $Y$ cuyas primeras cuatro columnas sean las mismas que X y cuya última columna es Petal L. + Petal W. con una matriz $C$ tal que $Y=XC$. 
+a) Considerando $Y=\begin{pmatrix}y_1 & y_2  & y_3  & y_4  & y_5\end{pmatrix}$ donde $y_i$ representa la $i$-ésima columna de $Y$ cuyas primeras cuatro columnas sean las mismas que X y cuya última columna es Petal L. + Petal W. con una matriz $C$ tal que $Y=XC$. 
 
 Tomamos $C$ de la forma:
 $$C=\begin{pmatrix}1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&1\\0&0&0&1&1\end{pmatrix}$$
@@ -156,7 +229,7 @@ Y<- X%*%C
 head(Y) 
 ```
 
-b)Calcular la matriz de covarianzas muestral $S_Y$ y sus eigenvalores y eigenvectores
+b) Calcular la matriz de covarianzas muestral $S_Y$ y sus eigenvalores y eigenvectores
 ```{r, echo=FALSE}
 n <- nrow(Y)
 unoY <- rep(1,n)
@@ -204,6 +277,70 @@ aprox <- t(C)%*%S_x%*%C
 norm(aprox - S_y)
 ```
 
+## Ejercicio 5:
+
+- ¿Cuál es el peso promedio de los bebés al nacimiento?
+```{r echo=FALSE}
+pesos<-births2006.smpl%>%
+  select(DBWT)%>%
+  mutate(DBWTk=DBWT/1000)%>%
+  filter(!is.na(DBWT))
+```
+El peso promedio de los bebés es de `r mean(pesos$DBWTk)` kg.
+
+- ¿Hay alguna relación entre la edad de la madre o su peso ganado y el peso de los bebés, o los nacimientos múltiples?
+
+```{r echo=FALSE}
+  Aux1<-births2006.smpl%>%
+  select(MAGER,DBWT,WTGAIN)%>%
+  filter(!is.na(MAGER))%>%
+  filter(!is.na(DBWT))%>%
+  filter(!is.na(WTGAIN))
+
+  rel<-cor(Aux1);
+```
+
+La correlación entre la edad de la madre y el peso del bebé al nacer es de `r rel[1,2]`. Por lo tanto, los datos analizados no muestran que haya una relación lineal entre dichas variables. Por otro lado, tampoco se observa una relación lineal entre el peso que gana la madre y el peso del bebé, ya que la correlación entre ambas variables fue de `r rel[2,3]`.
+
+- ¿Hay alguna relación entre la edad de la madre al momento del nacimiento y su nivel de escolaridad?
+
+- ¿Hay alguna relación entre la edad de la madre y el score Apgar del bebé?
+```{r, echo=FALSE}
+EdadApgar<-births2006.smpl%>%
+  select(MAGER,APGAR5)%>%
+  filter(!is.na(MAGER)&!is.na(APGAR5))
+relEA<-cor(EdadApgar)
+```
+
+La correlación entre la edad de la madre y el score Apgar del bebé es `r relEA[1,2]`, por lo que no se observa ninguna relación lineal entre dichas variables.
+
+- ¿Cuál es el periodo promedio de gestación y cuál es su desviación estándar?
+```{r, echo=FALSE}
+semGest<-births2006.smpl%>%
+  select(ESTGEST)%>%
+  filter(!is.na(ESTGEST))
+```
+El período promedio de gestación es de `r mean(semGest$ESTGEST)` semanas y las desviación estándar de `r sd(semGest$ESTGEST)` semanas.
+
+- ¿En qué meses nacen más bebés? ¿Cómo se distribuye el número de nacimientos por mes? ¿por día de la semana? 
+```{r echo=FALSE}
+births2006.smpl%>%ggplot(aes(DOB_MM, geom="density"))+
+  geom_histogram(bins=25,position = "identity")+
+  labs(title= "Histograma nacimientos por mes", x="mes", y="Conteo")
+births2006.smpl%>%ggplot(aes(DOB_MM, geom="density"))+
+  geom_density()+
+  labs(title= "Densidad del mes de nacimiento", x="mes", y="densidad")
+births2006.smpl%>%ggplot(aes(DOB_WK, geom="density"))+
+  geom_density()+
+  scale_x_discrete(limits=c("Dom", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"))+
+  labs(title= "Densidad del día de nacimiento", x="día", y="densidad")
+```
+
+
+- ¿Se puede predecir el peso del bebé de características como el período estimado de gestación y la ganancia en peso de la madre?
+
+
+- ¿Podemos identificar nacimientos que llevan a un score APGAR bajo? Por ejemplo, ¿la edad de la madre es un factor de riesgo?
 
 
 
